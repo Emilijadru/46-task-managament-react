@@ -1,0 +1,18 @@
+.mainHeader {
+display: flex;
+justify-content: space-between;
+padding: 2rem;
+box-shadow: 0 4px 8px #0003;
+position: sticky;
+top: 0;
+left: 0;
+right: 0;
+background-color: #fff;
+z-index: 1;
+}
+.logo {
+font-size: 2rem;
+line-height: 1em;
+}
+.btn {
+}
