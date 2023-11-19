@@ -6,7 +6,7 @@ export function KanbanColumn({ title, tasks }) {
         <div className={style.column}>
             <h2 className={style.title + ' normal underline'}>{title}</h2>
             <ul className={style.taskList}>
-                {tasks.map(task => <TaskCard data={task} />)}
+                {tasks.map((task, idx) => <TaskCard key={idx} data={task} />)}
             </ul>
         </div>
     );

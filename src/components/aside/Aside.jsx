@@ -1,9 +1,9 @@
 import { Form } from '../form/Form';
 import style from './Aside.module.css';
 
-export function Aside() {
+export function Aside({ addTask }) {
     return (
-        <aside id="aside" class={style.aside}>
+        <aside id="aside" className={style.aside}>
             <div className={style.asideBg}></div>
             <div className={style.asideContainer}>
                 <header className={style.asideHeader}>
@@ -11,7 +11,7 @@ export function Aside() {
                     <button type="button" className="fa fa-times"></button>
                 </header>
                 <div className={style.asideContent}>
-                    <Form />
+                    <Form addTask={addTask} />
                 </div>
             </div>
         </aside>

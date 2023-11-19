@@ -2,40 +2,14 @@ import { useState } from 'react';
 import style from './Kanban.module.css';
 import { KanbanColumn } from './KanbanColumn';
 
-export function Kanban() {
+export function Kanban({ tasks, removeTask }) {
     const [title, setTitle] = useState('');
-    const columns = ['Backlog', 'Todo'];
-    const data = [
-        {
-            id: 1,
-            columnIndex: 1,
-            title: 'HTML',
-            description: 'Task description about HTML',
-            deadline: 2024,
-            tags: ['html', 'font', 'color'],
-        },
-        {
-            id: 2,
-            columnIndex: 0,
-            title: 'CSS',
-            description: 'Task description about CSS',
-            deadline: 2024,
-            tags: ['css', 'column'],
-        },
-        {
-            id: 3,
-            columnIndex: 0,
-            title: 'JavaScript',
-            description: 'Task description about JavaScript',
-            deadline: 2024,
-            tags: ['js', 'loops', 'if'],
-        },
-    ];
+    const [columns, setColumns] = useState(['Backlog', 'Todo']);
 
     function newColumnSubmit(event) {
         event.preventDefault();
-        columns.push(title);
-        console.log('SUBMIT', title, columns);
+        setColumns(prev => [...prev, title]);
+        setTitle('');
     }
 
     function inputUpdate(event) {
@@ -43,11 +17,16 @@ export function Kanban() {
     }
 
     return (
-        <section id="kanban" className={style.todo} style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <section id="kanban" className={style.todo} style={{ gridTemplateColumns: `repeat(${columns.lenght + 1}, 1fr)` }}>
             {columns.map((column, idx) => (
-                <KanbanColumn tasks={data.filter(task => task.columnIndex === idx)} title={column}/>
+                <KanbanColumn 
+                key={idx} 
+                tasks={tasks.filter(task => task.columnIndex === idx)} 
+                title={column}
+                removeTask={removeTask}
+                />
             ))}
-        <form className={style.column}>
+        <form className={style.newcolumn}>
             <input type='text' value={title} onChange={inputUpdate} placeholder='Naujas stulpelis..' />
             <button type='submit' onClick={newColumnSubmit}>Prideti</button>
         </form>
